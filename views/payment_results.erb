@@ -14,4 +14,11 @@
 </div>
 <div>Payment</div>
 <div>
-  <%= @the_payment %>
+  <%= @monthly_payment.to_f.to_fs(:currency) %>
+</div>
+
+<br>
+
+<a href="/payment/new">
+  Calculate another payment
+</a>

@@ -44,12 +44,13 @@ get("/payment/results") do
 
   number_of_periods = @number_of_years * 12
 
-  the_rate_per_period = @the_apr.to_f / 1200
+  rate_per_period = @the_apr.to_f / 12 / 100
 
-  the_numerator = the_rate_per_period.to_f * @the_pv.to_f
+  numerator = rate_per_period * params.fetch("user_pv").to_f
 
-  @the_payment = the_numerator
+  denominator = 1 - (1 + rate_per_period) ** -number_of_periods
 
+  @monthly_payment = numerator / denominator
 
   erb(:payment_results)
 end
