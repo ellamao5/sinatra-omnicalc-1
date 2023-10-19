@@ -36,7 +36,8 @@ get("/payment/new") do
 end
 
 get("/payment/results") do
-  @the_apr = params.fetch("user_apr").to_f.to_fs(:percentage)
+  @the_apr = '%.4f' % params.fetch("user_apr").to_f.round(4)
+  @the_apr += "%" 
 
   @number_of_years = params.fetch("user_years").to_f
 
